@@ -23,6 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const serviceCollection = client.db("serviceReview").collection("services");
+    const reviewCollection = client.db("serviceReview").collection("reviews");
 
     app.get("/home", async (req, res) => {
       const query = {};
