@@ -39,6 +39,12 @@ async function run() {
       res.send(services);
     });
 
+    app.post("/services", async (req, res) => {
+      const service = req.body;
+      const result = await serviceCollection.insertOne(service);
+      res.send(result);
+    });
+
     app.get("/services/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
@@ -46,10 +52,11 @@ async function run() {
       res.send(service);
     });
 
+
     // review section
     app.post("/reviews", async (req, res) => {
-      const order = req.body;
-      const result = await reviewCollection.insertOne(order);
+      const review = req.body;
+      const result = await reviewCollection.insertOne(review);
       res.send(result);
     });
 
