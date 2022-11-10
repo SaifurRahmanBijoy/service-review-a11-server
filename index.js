@@ -47,17 +47,17 @@ async function run() {
     });
 
     // review section
-    app.post("/orders", async (req, res) => {
+    app.post("/reviews", async (req, res) => {
       const order = req.body;
       const result = await reviewCollection.insertOne(order);
       res.send(result);
     });
 
     app.get("/reviews", async (req, res) => {
-      const id = req.params.id;
       const query = {};
-      const service = await reviewCollection.findOne(query);
-      res.send(service);
+      const cursor = reviewCollection.find(query);
+      const reviews = await cursor.toArray();
+      res.send(reviews);
     });
   } finally {
   }
